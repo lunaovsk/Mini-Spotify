@@ -39,7 +39,7 @@ public class Sistema {
 	}
 
 	public void encerrarSistema() {
-		manager.close();
+		usuarioDao.encerrarSistema();
 		System.out.println("Sistema encerrado.");
 	}
 
