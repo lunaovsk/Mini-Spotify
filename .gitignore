@@ -18,3 +18,24 @@ target/
 # Sistema operacional
 .DS_Store
 Thumbs.db
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Maven
+/target/
+
+# Logs
+*.log
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de backup ou temporários
+*.class
+*.swp
+*.bak
+*.tmp
+

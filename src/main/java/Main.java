@@ -52,7 +52,7 @@ public class Main {
 				case 5: 
 					menu();
 					sistema.encerrarSistema();
-					break;
+					return;
 				default: 
 					System.out.println("Escolha um número das opções listas: ");
 				}
