@@ -26,7 +26,9 @@ public class Usuario {
 	@OneToMany(mappedBy="usuario")
 	private List<PlayList> playlist;
 	
-	
+	public Usuario () {
+
+	}
 
 	public Usuario(String nome, String email, List<PlayList> playlist) {
 		this.nome = nome;
@@ -72,6 +74,12 @@ public class Usuario {
 		this.playlist = playlist;
 	}
 
-
-
+	@Override
+	public String toString() {
+		return "Usuario{" +
+				"nome='" + nome + '\'' +
+				", email='" + email + '\'' +
+				"\nplaylist=" + playlist +
+				'}';
+	}
 }

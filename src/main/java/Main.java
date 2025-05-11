@@ -10,9 +10,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		EntityManager em = new JPAUtil().getEntityManager(); 
-        UsuarioDao usuarioDao = new UsuarioDao(em);          
-        Sistema sistema = new Sistema(usuarioDao);          
+		EntityManager em = new JPAUtil().getEntityManager();
+        Sistema sistema = new Sistema(em);
 		Scanner scan = new Scanner(System.in);
 		var count = true;
 		var menu = "===============Screen Sound===============";
@@ -38,12 +37,13 @@ public class Main {
 					break;
 				case 2:  
 					menu();
-					sistema.criarPlaylist();
+					var login = sistema.login();
+					sistema.criarPlaylist(login);
 					break;
 
 				case 3: 
 					menu();
-					sistema.login();
+					sistema.viewPlayList();
 					break;
 				case 4: 
 					menu();

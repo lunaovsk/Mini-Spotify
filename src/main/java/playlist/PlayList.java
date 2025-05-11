@@ -1,5 +1,6 @@
 package playlist;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class PlayList {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+	private Duration duracaoPlay;
 	@ManyToOne
 	@JoinColumn(name = "ss_usuario_id")
 	private Usuario usuario;
@@ -37,6 +39,12 @@ public class PlayList {
 		this.nome = nome;
 		this.usuario = usuario;
 		this.midias = new ArrayList<>();
+	}
+	public PlayList(String nome, Usuario usuario, Duration duracaoPlay, List<Midias> midias) {
+		this.nome = nome;
+		this.usuario = usuario;
+		this.duracaoPlay = duracaoPlay;
+		this.midias = midias;
 	}
 
 	public Long getId() {
@@ -69,6 +77,14 @@ public class PlayList {
 
 	public void setMidias(List<Midias> midias) {
 		this.midias = midias;
+	}
+
+	public Duration getDuracaoPlay() {
+		return duracaoPlay;
+	}
+
+	public void setDuracaoPlay(Duration duracaoPlay) {
+		this.duracaoPlay = duracaoPlay;
 	}
 	
 	

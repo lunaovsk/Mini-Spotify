@@ -1,5 +1,7 @@
 package playlist;
 
+import usuario.Usuario;
+
 import javax.persistence.EntityManager;
 
 public class PlayListDao {
@@ -9,7 +11,7 @@ public class PlayListDao {
 	public PlayListDao(EntityManager em) {
 		this.em = em;
 	}
-	public void registerUser(PlayList playlist) {
+	public void registerPlayList(Usuario usuario, PlayList playlist) {
 		em.getTransaction().begin();
 		em.persist(playlist);
 		em.getTransaction().commit();
