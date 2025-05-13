@@ -60,8 +60,5 @@ ALTER TABLE ss_midia DROP COLUMN tipo;
 select * from ss_midia where tipo = ?;
 
 
-
-
-
-
-
+ALTER TABLE ss_midia
+MODIFY COLUMN duracao BIGINT not null;
