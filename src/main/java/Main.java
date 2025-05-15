@@ -3,6 +3,7 @@ import java.util.Scanner;
 import javax.persistence.EntityManager;
 
 import controller.Sistema;
+import usuario.Usuario;
 import usuario.UsuarioDao;
 import util.JPAUtil;
 
@@ -12,6 +13,7 @@ public class Main {
 		
 		EntityManager em = new JPAUtil().getEntityManager();
         Sistema sistema = new Sistema(em);
+<<<<<<< Updated upstream
 		Scanner scan = new Scanner(System.in);
 		var count = true;
 		var menu = "===============Screen Sound===============";
@@ -55,26 +57,48 @@ public class Main {
 					return;
 				default: 
 					System.out.println("Escolha um número das opções listas: ");
+=======
+		try {
+			while (true) {
+				int selecao = sistema.menu();
+				switch (selecao) {
+					case 1:
+
+						break;
+					case 2:
+						sistema.listarMusicas();
+						break;
+					case 3:
+						sistema.addUser();
+						break;
+					case 4:
+						int opcao = sistema.opcao();
+						switch (opcao) {
+							case 1:
+								sistema.criarPlaylist();
+								break;
+							case 2:
+								sistema.adicionarMidias();
+								break;
+							case 3:
+								break;
+							default:
+								System.out.println("Escolha um número das opções listas: ");
+						}
+						break;
+					case 5:
+						sistema.viewPlayList();
+						break;
+					case 6:
+						sistema.encerrarSistema();
+						return;
+					default:
+						System.out.println("Escolha um número das opções listas: ");
+>>>>>>> Stashed changes
 				}
-				
-			} catch (NumberFormatException e) {
-				System.out.println("Insira apenas números.");
-				
 			}
-			
-			
+		} catch (Exception e) {
+			System.out.println("Erro inesperado: " + e.getMessage());
 		}
-		
-
 	}
-	public static void menu() {
-		System.out.println("===============Screen Sound===============");
-	}
-	public static void footer() {
-		System.out.println("\n\n==========================================");
-	}
-	public static void errorNãoMapeado () {
-		System.out.println("Contate o administrador.");
-	}
-
 }

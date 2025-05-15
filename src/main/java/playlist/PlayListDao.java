@@ -3,6 +3,7 @@ package playlist;
 import usuario.Usuario;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 public class PlayListDao {
 	
@@ -13,12 +14,24 @@ public class PlayListDao {
 	}
 	public void registerPlayList(Usuario usuario, PlayList playlist) {
 		em.getTransaction().begin();
+		em.persist(usuario);
 		em.persist(playlist);
 		em.getTransaction().commit();
 	}
-	public PlayList buscarPlayList(Long id) {
-		return em.find(PlayList.class, id);
+	public PlayList findByPlayName(String nome) {
+
+		return em.find(PlayList.class, nome);
 	}
+
+	public List<PlayList> findAll (Long usuarioId) {
+		List<PlayList> playLists = em.createQuery("SELECT p FROM PlayList p WHERE p.usuario.id = :id", PlayList.class)
+				.setParameter("id", usuarioId)
+				.getResultList();
+		return playLists;
+	}
+
+
+
 	
 
 

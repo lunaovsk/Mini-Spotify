@@ -33,7 +33,7 @@ public class Usuario {
 	public Usuario(String nome, String email, List<PlayList> playlist) {
 		this.nome = nome;
 		this.email = email;
-		this.playlist = new ArrayList<>();
+		this.playlist = playlist;
 	}
 
 
@@ -74,12 +74,21 @@ public class Usuario {
 		this.playlist = playlist;
 	}
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 	@Override
 	public String toString() {
 		return "Usuario{" +
 				"nome='" + nome + '\'' +
 				", email='" + email + '\'' +
+<<<<<<< Updated upstream
 				"\nplaylist=" + playlist +
+=======
+				"\nplaylist=" + getPlaylist() +
+>>>>>>> Stashed changes
 				'}';
 	}
 }

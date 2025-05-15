@@ -1,7 +1,5 @@
 package midia;
 
-import java.time.Duration;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,38 +9,30 @@ import playlist.PlayList;
 
 @Entity
 @Table(name = "ss_midia")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_midia", discriminatorType = DiscriminatorType.STRING)
 public class Midias {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String titulo;
 	private String artista;
-	private LocalTime duracao;
+	private int duracao;
 	@Enumerated(EnumType.STRING)
 	private GenerosMusicais genero;
 	@ManyToMany(mappedBy = "midias")
 	private List<PlayList> playlist = new ArrayList<>();
-	@Enumerated(EnumType.STRING)
-	@Column(name = "tipo_midia")
-	private TipoMidia tipo;
 
-	public Midias() {
-
-	}
-
-	public Midias(String titulo, String artista, LocalTime duracao, GenerosMusicais genero) {
+	public Midias(String titulo, String artista, int duracao, GenerosMusicais genero, List<PlayList> playlist) {
 		this.titulo = titulo;
 		this.artista = artista;
 		this.duracao = duracao;
 		this.genero = genero;
+		this.playlist = playlist;
 	}
 
-	public Midias(String titulo, String artista, LocalTime duracao, TipoMidia tipo) {
-		this.titulo = titulo;
-		this.artista = artista;
-		this.duracao = duracao;
-		this.tipo = tipo;
+	public Midias() {
+
 	}
 
 	public Long getId() {
@@ -69,11 +59,11 @@ public class Midias {
 		this.artista = artista;
 	}
 
-	public LocalTime getDuracao() {
+	public int getDuracao() {
 		return duracao;
 	}
 
-	public void setDuracao(LocalTime duracao) {
+	public void setDuracao(int duracao) {
 		this.duracao = duracao;
 	}
 
@@ -93,31 +83,12 @@ public class Midias {
 		this.playlist = playlist;
 	}
 
-	public TipoMidia getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoMidia tipo) {
-		this.tipo = tipo;
-	}
-
 	@Override
 	public String toString() {
 		return "Midias{" +
 				"titulo='" + titulo + '\'' +
 				", artista='" + artista + '\'' +
 				", duracao=" + duracao +
-				", tipo=" + tipo +
-				'}';
-	}
-
-	public String toStringMusicas() {
-		return "Músicas {" +
-				"titulo='" + titulo + '\'' +
-				", artista='" + artista + '\'' +
-				", duracao=" + duracao +
-				", genero=" + genero +
-				", tipo=" + tipo +
-				'}';
+				", genero=" + genero;
 	}
 }

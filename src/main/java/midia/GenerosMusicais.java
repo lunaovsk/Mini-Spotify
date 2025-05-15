@@ -5,7 +5,15 @@ public enum GenerosMusicais {
     POP(2, "Pop"),
     MPB(3, "MPB"),
     JAZZ(4, "Jazz"),
+<<<<<<< Updated upstream
     CLASSICA(5, "Clássica");
+=======
+    CLASSICA(5, "Clássica"),
+    FICCAO(6, "Ficção"),
+    BIOGRAFIA(7, "Biografia"),
+    TECH(8, "Tecnologia"),
+    ENTRETENIMENTO(9, "Entretenimento");
+>>>>>>> Stashed changes
 
     private final int indice;
     private final String descricao;
@@ -19,6 +27,10 @@ public enum GenerosMusicais {
     public String getDescricao() {
         return descricao;
     }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     public int getIndice() {
         return indice;
     }

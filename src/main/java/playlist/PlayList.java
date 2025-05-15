@@ -4,41 +4,40 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import midia.Midias;
 import usuario.Usuario;
 
 @Entity
 @Table(name = "ss_playlist")
 public class PlayList {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	private String nome;
+<<<<<<< Updated upstream
 	private Duration duracaoPlay;
+=======
+
+>>>>>>> Stashed changes
 	@ManyToOne
-	@JoinColumn(name = "ss_usuario_id")
+	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
+
 	@ManyToMany
-	@JoinTable(name = "ss_playlist_midia", 
-	joinColumns = @JoinColumn(name = "playlist_id"),
-	inverseJoinColumns = @JoinColumn(name = "midia_id"))
-	private List<Midias> midias;
-	
+	@JoinTable(name = "ss_playlist_midia",
+			joinColumns = @JoinColumn(name = "playlist_id"),
+			inverseJoinColumns = @JoinColumn(name = "midia_id"))
+	private List<Midias> midias = new ArrayList<>();
+
+	public PlayList() {}
+
 	public PlayList(String nome, Usuario usuario, List<Midias> midias) {
 		this.nome = nome;
 		this.usuario = usuario;
-		this.midias = new ArrayList<>();
+		this.midias = midias;
 	}
 	public PlayList(String nome, Usuario usuario, Duration duracaoPlay, List<Midias> midias) {
 		this.nome = nome;
@@ -46,6 +45,8 @@ public class PlayList {
 		this.duracaoPlay = duracaoPlay;
 		this.midias = midias;
 	}
+
+	// Getters e setters
 
 	public Long getId() {
 		return id;
@@ -78,6 +79,7 @@ public class PlayList {
 	public void setMidias(List<Midias> midias) {
 		this.midias = midias;
 	}
+<<<<<<< Updated upstream
 
 	public Duration getDuracaoPlay() {
 		return duracaoPlay;
@@ -91,5 +93,21 @@ public class PlayList {
 	
 	
 	
+=======
+>>>>>>> Stashed changes
 
+	public int getDuracaoTotal() {
+		return midias.stream().mapToInt(Midias::getDuracao).sum();
+	}
+
+	@Override
+	public String toString() {
+		return "PlayList{" +
+				"id=" + id +
+				", nome='" + nome + '\'' +
+				", usuario=" + (usuario != null ? usuario.getNome() : "null") +
+				", duracaoTotal=" + getDuracaoTotal() +
+				", midias=" + midias +
+				'}';
+	}
 }
