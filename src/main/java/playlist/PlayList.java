@@ -1,6 +1,5 @@
 package playlist;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +16,7 @@ public class PlayList {
 	private Long id;
 
 	private String nome;
-<<<<<<< Updated upstream
-	private Duration duracaoPlay;
-=======
 
->>>>>>> Stashed changes
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
@@ -39,15 +34,6 @@ public class PlayList {
 		this.usuario = usuario;
 		this.midias = midias;
 	}
-	public PlayList(String nome, Usuario usuario, Duration duracaoPlay, List<Midias> midias) {
-		this.nome = nome;
-		this.usuario = usuario;
-		this.duracaoPlay = duracaoPlay;
-		this.midias = midias;
-	}
-
-	// Getters e setters
-
 	public Long getId() {
 		return id;
 	}
@@ -79,22 +65,6 @@ public class PlayList {
 	public void setMidias(List<Midias> midias) {
 		this.midias = midias;
 	}
-<<<<<<< Updated upstream
-
-	public Duration getDuracaoPlay() {
-		return duracaoPlay;
-	}
-
-	public void setDuracaoPlay(Duration duracaoPlay) {
-		this.duracaoPlay = duracaoPlay;
-	}
-	
-	
-	
-	
-	
-=======
->>>>>>> Stashed changes
 
 	public int getDuracaoTotal() {
 		return midias.stream().mapToInt(Midias::getDuracao).sum();

@@ -1,8 +1,6 @@
 package midia;
 
 import playlist.PlayList;
-
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.EntityManager;
 import java.util.List;
 

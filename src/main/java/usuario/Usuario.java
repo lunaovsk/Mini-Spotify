@@ -74,21 +74,14 @@ public class Usuario {
 		this.playlist = playlist;
 	}
 
-<<<<<<< Updated upstream
-=======
 
 
->>>>>>> Stashed changes
 	@Override
 	public String toString() {
 		return "Usuario{" +
 				"nome='" + nome + '\'' +
 				", email='" + email + '\'' +
-<<<<<<< Updated upstream
-				"\nplaylist=" + playlist +
-=======
 				"\nplaylist=" + getPlaylist() +
->>>>>>> Stashed changes
 				'}';
 	}
 }
