@@ -76,3 +76,37 @@ Cada tipo de mídia herda os atributos da classe `Midia` e pode ter comportament
 
 ---
 
+## 📊 Diagrama de Classes (Core)
+
+```mermaid
+classDiagram
+    direction TB
+    
+    class Midia {
+        <<abstract>>
+        +Long id
+        +String titulo
+        +String artista
+        +Long duracao
+        +Genero genero
+    }
+    
+    class PlayList {
+        +Long id
+        +String nome
+        +Long duracaoTotal
+        +converterDuracao() String
+    }
+    
+    class Usuario {
+        +Long id
+        +String nome
+        +String email
+    }
+    
+    Midia <|-- Musica
+    Midia <|-- Podcast
+    Midia <|-- Audiobook
+    
+    Usuario "1" --> "n" PlayList
+    PlayList "n" --> "n" Midia
