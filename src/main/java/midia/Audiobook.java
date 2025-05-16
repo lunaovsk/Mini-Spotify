@@ -1,19 +1,24 @@
 package midia;
 
-import playlist.PlayList;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import java.util.List;
 
 @Entity
 @DiscriminatorValue("AUDIOBOOK")
 public class Audiobook extends Midias {
 	
-	public Audiobook(String titulo, String artista, int duracao, GenerosMusicais genero, List<PlayList> playlist) {
-		super(titulo, artista, duracao, genero, playlist);
+	public Audiobook(String titulo, String artista, Long duracao, Generos genero) {
+		super(titulo, artista, duracao, genero);
 	}
 	public Audiobook () {
 
+	}
+	@Override
+	public String toString() {
+		return super.toString() + "(" +
+				"Audiobook: " + getTitulo()
+				+ ", Voz: " + getArtista()
+				+ ", Duração: " + getDuracao()
+				+ ", Gêneros Literário: " + getGenero().getDescricao() + ");";
 	}
 }

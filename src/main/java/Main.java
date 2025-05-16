@@ -1,16 +1,10 @@
-import java.util.Scanner;
-
 import javax.persistence.EntityManager;
-
 import controller.Sistema;
-import usuario.Usuario;
-import usuario.UsuarioDao;
 import util.JPAUtil;
 
 public class Main {
 
 	public static void main(String[] args) {
-
 		EntityManager em = new JPAUtil().getEntityManager();
         Sistema sistema = new Sistema(em);
 		try {
@@ -18,7 +12,7 @@ public class Main {
 				int selecao = sistema.menu();
 				switch (selecao) {
 					case 1:
-
+						sistema.catalogo();
 						break;
 					case 2:
 						sistema.listarMusicas();
@@ -45,6 +39,9 @@ public class Main {
 						sistema.viewPlayList();
 						break;
 					case 6:
+						sistema.viewAll();
+						break;
+					case 7:
 						sistema.encerrarSistema();
 						return;
 					default:

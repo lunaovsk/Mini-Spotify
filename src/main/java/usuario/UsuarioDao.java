@@ -2,6 +2,7 @@ package usuario;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import java.util.List;
 
 public class UsuarioDao {
 	
@@ -16,9 +17,6 @@ public class UsuarioDao {
 		em.persist(usuario);
 		em.getTransaction().commit();
 	}
-	public Usuario buscarUser(Long id) {
-		return em.find(Usuario.class, id);
-	}
 	public Usuario findByEmail(String email) {
         try {
             var sql = em.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class)
@@ -29,24 +27,21 @@ public class UsuarioDao {
             return null; 
         }
     }
-	public Boolean removerPlayList(Long usuarioId, Long playlistId) {
-		Usuario usuario = buscarUser(usuarioId);
-		
-		if (usuario != null) {
-			em.getTransaction().begin();
-			em.merge(usuario);
-			em.getTransaction().commit();
-			
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
 	
 	public void encerrarSistema() {
 		em.close();
 	}
-	
+
+	public List<Usuario> findByYourPlayList(Usuario usuario) {
+		var sql = em.createQuery("""
+        SELECT DISTINCT u
+        FROM Usuario u
+        LEFT JOIN FETCH u.playlist pl
+        LEFT JOIN FETCH pl.midias m
+        WHERE u.email = :email
+        """, Usuario.class)
+				.setParameter("email", usuario.getEmail());
+		return sql.getResultList();
+	}
 
 }

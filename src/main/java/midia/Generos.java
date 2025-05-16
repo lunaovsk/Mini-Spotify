@@ -1,6 +1,6 @@
 package midia;
 
-public enum GenerosMusicais {
+public enum Generos {
     ROCK(1, "Rock"),
     POP(2, "Pop"),
     MPB(3, "MPB"),
@@ -14,25 +14,12 @@ public enum GenerosMusicais {
     private final int indice;
     private final String descricao;
 
-    GenerosMusicais(int indice, String descricao) {
+    Generos(int indice, String descricao) {
         this.indice = indice;
         this.descricao = descricao;
 
     }
-
     public String getDescricao() {
         return descricao;
-    }
-
-    public int getIndice() {
-        return indice;
-    }
-    public static GenerosMusicais porIndice(int indice) {
-        for (GenerosMusicais c: GenerosMusicais.values()) {
-            if(c.getIndice() == indice) {
-                return c;
-            }
-        }
-        return null;
     }
 }

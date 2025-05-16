@@ -1,5 +1,5 @@
 create database db_screen_sound;
-
+use db_screen_sound;
 CREATE TABLE ss_usuario (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(255) NOT NULL,
@@ -36,6 +36,23 @@ CREATE TABLE ss_playlist_midia (
     REFERENCES ss_midia(id) 
     ON DELETE CASCADE
 );
+
+
+select * from ss_playlist_midia;
+select * from ss_playlist;
+select * from ss_midia;
+select * from ss_usuario;
+
+SELECT u.nome, pl.nome, m.titulo, m.artista, sum(m.duracao), m.tipo_midia, m.genero
+FROM ss_usuario u 
+LEFT JOIN ss_playlist pl ON pl.usuario_id = u.id
+LEFT JOIN ss_playlist_midia pm ON pm.playlist_id = pl.id
+LEFT JOIN ss_midia m ON pm.midia_id = m.id
+GROUP BY u.nome, pl.nome, m.titulo, m.artista, m.tipo_midia, m.genero;
+
+
+
+  
 
 
 

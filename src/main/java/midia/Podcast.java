@@ -1,18 +1,23 @@
 package midia;
 
-import playlist.PlayList;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import java.util.List;
 
 @Entity
 @DiscriminatorValue("PODCAST")
 public class Podcast extends Midias {
-	public Podcast(String titulo, String artista, int duracao, GenerosMusicais genero, List<PlayList> playlist) {
-		super(titulo, artista, duracao, genero, playlist);
+	public Podcast(String titulo, String artista, Long duracao, Generos genero) {
+		super(titulo, artista, duracao, genero);
 	}
 	public Podcast() {
 
+	}
+	@Override
+	public String toString() {
+		return super.toString() + "(" +
+				"Podcast: " + getTitulo()
+				+ ", Apresentador: " + getArtista()
+				+ ", Duração: " + getDuracao()
+				+ ", Assunto: " + getGenero().getDescricao() + ");";
 	}
 }

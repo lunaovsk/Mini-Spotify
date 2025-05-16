@@ -1,34 +1,26 @@
 package midia;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.*;
-
-import playlist.PlayList;
 
 @Entity
 @Table(name = "ss_midia")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_midia", discriminatorType = DiscriminatorType.STRING)
-public class Midias {
+public abstract class Midias {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String titulo;
 	private String artista;
-	private int duracao;
+	private Long duracao;
 	@Enumerated(EnumType.STRING)
-	private GenerosMusicais genero;
-	@ManyToMany(mappedBy = "midias")
-	private List<PlayList> playlist = new ArrayList<>();
+	private Generos genero;
 
-	public Midias(String titulo, String artista, int duracao, GenerosMusicais genero, List<PlayList> playlist) {
+	public Midias(String titulo, String artista, Long duracao, Generos genero) {
 		this.titulo = titulo;
 		this.artista = artista;
 		this.duracao = duracao;
 		this.genero = genero;
-		this.playlist = playlist;
 	}
 
 	public Midias() {
@@ -59,38 +51,28 @@ public class Midias {
 		this.artista = artista;
 	}
 
-	public int getDuracao() {
+	public Long getDuracao() {
 		return duracao;
 	}
 
-	public void setDuracao(int duracao) {
+	public void setDuracao(Long duracao) {
 		this.duracao = duracao;
 	}
 
-	public GenerosMusicais getGenero() {
+	public Generos getGenero() {
 		return genero;
 	}
 
-	public void setGenero(GenerosMusicais genero) {
+	public void setGenero(Generos genero) {
 		this.genero = genero;
 	}
 
-	public List<PlayList> getPlaylist() {
-		return playlist;
-	}
-
-	public void setPlaylist(List<PlayList> playlist) {
-		this.playlist = playlist;
-	}
 
 	@Override
 	public String toString() {
-		return "Midias{" +
-				"titulo='" + titulo + '\'' +
-				", artista='" + artista + '\'' +
-				", duracao=" + duracao +
-				", genero=" + genero;
+		return "Biblioteca: ";
 	}
+
 }
 
 

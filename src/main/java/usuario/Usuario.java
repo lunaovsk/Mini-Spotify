@@ -1,18 +1,10 @@
 package usuario;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
+import midia.Midias;
 import playlist.PlayList;
-
-
 
 @Entity
 @Table (name = "ss_usuario")
@@ -23,14 +15,14 @@ public class Usuario {
 	private Long id;
 	private String nome;
 	private String email;
-	@OneToMany(mappedBy="usuario")
-	private List<PlayList> playlist;
+	@OneToMany(mappedBy="usuario", fetch = FetchType.LAZY)
+	private Set<PlayList> playlist;
 	
 	public Usuario () {
 
 	}
 
-	public Usuario(String nome, String email, List<PlayList> playlist) {
+	public Usuario(String nome, String email, Set<PlayList> playlist) {
 		this.nome = nome;
 		this.email = email;
 		this.playlist = playlist;
@@ -65,12 +57,23 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public List<PlayList> getPlaylist() {
-		return playlist;
+
+
+	public Set<PlayList> getPlaylist() {
+		for (PlayList pl : this.playlist) {
+			Long duracaoPl = pl.getDuracao();
+			System.out.println("PlayList (" + pl.getNome() + "| Duração: " + pl.converter(duracaoPl) + ")\n");
+			for (Midias m : pl.getMidias()) {
+				System.out.println("  Titulo: " + m.getTitulo() +
+						" | Autor: " + m.getArtista() +
+						" | Genero: " + m.getGenero());
+			}
+		}
+		return this.playlist;
 	}
 
 
-	public void setPlaylist(List<PlayList> playlist) {
+	public void setPlaylist(Set<PlayList> playlist) {
 		this.playlist = playlist;
 	}
 
@@ -78,10 +81,8 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario{" +
-				"nome='" + nome + '\'' +
-				", email='" + email + '\'' +
-				"\nplaylist=" + getPlaylist() +
-				'}';
+		System.out.println("Usuario (Nome: " + nome + ")");
+		getPlaylist();
+		return "";
 	}
 }
