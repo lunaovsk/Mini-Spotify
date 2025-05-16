@@ -8,7 +8,9 @@
 - Buscas por artista, título ou gênero  
 - Cálculo automático da duração total das playlists  
 
-![Java](https://img.shields.io/badge/Java-23%2B-blue)![JPA](https://img.shields.io/badge/JPA-Hibernate-orange)![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)
+![Java](https://img.shields.io/badge/Java-23%2B-blue)
+![JPA](https://img.shields.io/badge/JPA-Hibernate-orange)
+![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)
 
 ---
 
