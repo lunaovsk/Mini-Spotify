@@ -76,6 +76,38 @@ Cada tipo de mídia herda os atributos da classe `Midia` e pode ter comportament
 
 ---
 
+## 🏁 Conclusão
+
+Este projeto implementou com sucesso um **sistema completo de streaming musical**, demonstrando:
+
+✅ **Domínio de JPA/Hibernate**  
+- Mapeamento ORM avançado com herança (`SINGLE_TABLE`)  
+- Relacionamentos `@OneToMany` e `@ManyToMany` otimizados  
+- Consultas JPQL eficientes  
+
+✅ **Padrões OO sólidos**  
+- Hierarquia de classes bem definida (`Midia` como abstração)  
+- Encapsulamento rigoroso  
+- Polimorfismo em operações de catálogo  
+
+✅ **Boas práticas**  
+- Tratamento de exceções  
+- Separação de concerns (DAO vs Controller)  
+- Documentação clara  
+
+### Próximos Passos
+- [ ] Adicionar autenticação JWT  
+- [ ] Implementar API REST com Spring Boot  
+- [ ] Desenvolver frontend em React/Angular  S
+
+---
+🎉 Projeto acadêmico concluído com excelência
+
+📆 Data de entrega: 19/05/2025.
+📜 Licença: MIT (livre para uso educacional).
+
+---
+
 ## 📊 Diagrama de Classes (Core)
 
 ```mermaid
@@ -109,36 +141,4 @@ classDiagram
     Midia <|-- Audiobook
     
     Usuario "1" --> "n" PlayList
-    PlayList "n" --> "n" Midia 
-
----
-
-## 🏁 Conclusão
-
-Este projeto implementou com sucesso um **sistema completo de streaming musical**, demonstrando:
-
-✅ **Domínio de JPA/Hibernate**  
-- Mapeamento ORM avançado com herança (`SINGLE_TABLE`)  
-- Relacionamentos `@OneToMany` e `@ManyToMany` otimizados  
-- Consultas JPQL eficientes  
-
-✅ **Padrões OO sólidos**  
-- Hierarquia de classes bem definida (`Midia` como abstração)  
-- Encapsulamento rigoroso  
-- Polimorfismo em operações de catálogo  
-
-✅ **Boas práticas**  
-- Tratamento de exceções  
-- Separação de concerns (DAO vs Controller)  
-- Documentação clara  
-
-### Próximos Passos
-- [ ] Adicionar autenticação JWT  
-- [ ] Implementar API REST com Spring Boot  
-- [ ] Desenvolver frontend em React/Angular  S
-
----
-🎉 Projeto acadêmico concluído com excelência
-
-📆 Data de entrega: 19/05/2025.
-📜 Licença: MIT (livre para uso educacional).
+    PlayList "n" --> "n" Midia
