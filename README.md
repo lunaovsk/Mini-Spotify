@@ -47,6 +47,21 @@
 
 ---
 
+## Estrutura Orientada a Objetos
+
+O sistema utiliza herança para representar os diferentes tipos de mídia:
+
+- **Classe abstrata `Midia`**
+  - Atributos comuns: `título`, `artista`, `duração`, `gênero`
+- **Subclasses:**
+  - `Musica`
+  - `Podcast`
+  - `Audiobook`
+
+Cada tipo de mídia herda os atributos da classe `Midia` e pode ter comportamentos específicos, se necessário. Isso garante reutilização de código e facilita a manutenção e expansão do sistema.
+
+---
+
 ## Como Executar
 
 ###Pré-requisitos:
