@@ -64,9 +64,9 @@ Cada tipo de mídia herda os atributos da classe `Midia` e pode ter comportament
 
 ---
 
-## Como Executar
+# Como Executar
 
-###Pré-requisitos:
+## Pré-requisitos:
 
 - JDK 23 instalado
 
