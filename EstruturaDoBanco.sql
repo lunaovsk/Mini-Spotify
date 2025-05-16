@@ -1,7 +1,5 @@
 create database db_screen_sound;
 
-use db_screen_sound;
-
 CREATE TABLE ss_usuario (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(255) NOT NULL,
@@ -15,6 +13,7 @@ CREATE TABLE ss_playlist (
     FOREIGN KEY (usuario_id) 
     REFERENCES ss_usuario(id)
 );
+
 CREATE TABLE ss_midia (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
   titulo VARCHAR(255) NOT NULL,
@@ -37,6 +36,7 @@ CREATE TABLE ss_playlist_midia (
     REFERENCES ss_midia(id) 
     ON DELETE CASCADE
 );
+
 
 
 
