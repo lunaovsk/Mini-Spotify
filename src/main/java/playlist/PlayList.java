@@ -73,9 +73,6 @@ public class PlayList {
 	}
 
 	public Long getDuracao() {
-		for (Midias m : midias) {
-			duracao += m.getDuracao();
-		}
 		return duracao;
 	}
 
