@@ -17,11 +17,13 @@ public class Sistema {
 	private UsuarioDao usuarioDao;
 	private PlayListDao listDao;
 	private MidiasDao midiasDao;
+	private EntityManager em;
 
 	public Sistema(EntityManager em) {
 		this.usuarioDao = new UsuarioDao(em);
 		this.listDao = new PlayListDao(em);
 		this.midiasDao = new MidiasDao(em);
+		this.em = em;
 	}
 
 	public void catalogo() {
@@ -74,12 +76,10 @@ public class Sistema {
 			System.out.println("Login cancelado. Retornando ao menu...");
 			return;
 		}
+		em.clear();
 		Usuario usuario = usuarioDao.findByEmail(email.getEmail());
 		if (usuario == null) {
-			usuario = testeUser();
-			if (usuario == null) {
-				return;
-			}
+			return;
 		}
 		System.out.print("\nQual o nome que deseja para a PlayList? ");
 		String nome = scan.nextLine().trim();
@@ -89,11 +89,12 @@ public class Sistema {
 	}
 	public void adicionarMidias() {
 		Usuario email = login();
-		Usuario usuario = usuarioDao.findByEmail(email.getEmail());
-		if (usuario == null) {
-			usuario = testeUser();
-			if (usuario == null) {return;}
+		if (email == null) {
+			System.out.println("Login cancelado. Retornando ao menu...");
+			return;
 		}
+		em.clear();
+		Usuario usuario = usuarioDao.findByEmail(email.getEmail());
 		List<PlayList> list = findPlayListsByUsuario(usuario);
 		if (list.isEmpty()) {
 			System.out.println("Não há playlist criadas em seu usuario.");
@@ -126,21 +127,54 @@ public class Sistema {
 	}
 	public void viewPlayList() {
 		Usuario email = login();
-		Usuario usuario = usuarioDao.findByEmail(email.getEmail());
-		if (usuario == null) {
-			testeUser();
+		if (email == null) {
+			System.out.println("Login cancelado. Retornando ao menu...");
 			return;
 		}
-		List<Usuario> list = usuarioDao.findByYourPlayList(usuario);
-		if (list.isEmpty()) {
-			System.out.println("Você não possuí PlayLists. ");
-			return;
-		}
+		em.clear();
+		List<Usuario> list = usuarioDao.findByYourPlayList(email);
 		for (Usuario dto : list) {
-			if (dto != null ) {
-				System.out.println(dto);
-			}
+			System.out.println(dto);
 		}
+	}
+	public void removerMidia () {
+		Usuario email = login();
+		if (email == null) {
+			System.out.println("Login cancelado. Retornando ao menu...");
+			return;
+		}
+		em.clear();
+		Usuario usuario = usuarioDao.findByEmail(email.getEmail());
+		List<PlayList> list = findPlayListsByUsuario(usuario);
+		if (list.isEmpty()) {
+			System.out.println("Não há playlist criadas em seu usuario.");
+			return;
+		}
+		Long playListId = escolherPlayListId(list);
+		if (playListId == null) {
+			System.out.println("Nenhuma playlist selecionada.");
+			return;
+		}
+		boolean continuarAdd = true;
+		do {
+			viewPlayList();
+			System.out.print("Digite o ID da mídia que deseja remover: ");
+			Long midiaId = scan.nextLong();
+			if (midiaId == null) {
+				System.out.println("Nenhuma música encontrada.");
+				continue;
+			}
+			midiasDao.removeMidia(playListId, midiaId);
+			System.out.println("Mídia removida com sucesso!");
+			System.out.print("1. Remover mídia\n2. Sair\n" +
+					"Qual opção desejada? ");
+			int add = scan.nextInt();
+			if (add == 2) {
+				continuarAdd = false;
+			}
+
+		} while (continuarAdd);
+		System.out.println("Retornando ao menu!");
 	}
 	public List<PlayList> findPlayListsByUsuario(Usuario usuario) {
 		Long id = usuario.getId();
@@ -262,7 +296,7 @@ public class Sistema {
 					+ "7. Sair.");
 			System.out.print("Qual opção deseja? ");
 			selecao = scan.nextInt();
-			System.out.println("==========================================");
+			System.out.println("\n==========================================");
 		} catch (NumberFormatException e) {
 			System.out.println("Insira apenas números.");
 		}
@@ -283,26 +317,20 @@ public class Sistema {
 	}
 	public Usuario testeUser() {
 		System.out.println("Usuário não encontrado.");
-		System.out.println("Não possui conta? Digite \"sim\" para ir para o cadastro ou pressione Enter para voltar ao menu:");
-		String resposta = scan.nextLine().trim().toLowerCase();
-		if (resposta.equals("sim")) {
-			addUser();
-			return login();
-		} else {
-			System.out.println("Retornando ao menu...");
-			return null;
-		}
-
+		System.out.println("Pressione Enter para voltar ao menu:");
+		scan.nextLine().trim();
+		System.out.println("Retornando ao menu...");
+		return null;
 	}
 	public int opcao() {
 
 		int selecao = 0;
 		try {
 			System.out.println("===============Screen Sound===============");
-			System.out.println("\n1. Criar PlayList. \n" + "2. Adicionar músicas. \n" + "3. Sair");
-			System.out.print("Qual opção deseja? ");
+			System.out.println("\n1. Criar PlayList. \n" + "2. Adicionar músicas. \n" + "3. Remover midia.\n"+"4. Sair.");
+			System.out.print("\nQual opção deseja? ");
 			selecao = scan.nextInt();
-			System.out.println("==========================================");
+			System.out.println("\n==========================================");
 		}catch (NumberFormatException e) {
 			System.out.println("Insira apenas números.");
 		}
