@@ -16,6 +16,7 @@ public class PlayListDao {
 		em.getTransaction().begin();
 		em.persist(usuario);
 		em.persist(playlist);
+		em.flush();
 		em.getTransaction().commit();
 	}
 	public List<PlayList> findAll(Long usuarioId) {
@@ -30,7 +31,7 @@ public class PlayListDao {
         FROM Usuario u
         LEFT JOIN FETCH u.playlist pl
         LEFT JOIN FETCH pl.midias m
-        """, Usuario.class).getResultList();
-		return sql;
+        """, Usuario.class);
+		return sql.getResultList();
 	}
 }
