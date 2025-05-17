@@ -1,5 +1,7 @@
 package usuario;
 
+import playlist.PlayList;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import java.util.List;
@@ -19,15 +21,15 @@ public class UsuarioDao {
 	}
 	public Usuario findByEmail(String email) {
         try {
-            var sql = em.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class)
+			var sql = em.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class)
                      .setParameter("email", email)
                      .getSingleResult();
-            return sql;
+			return sql;
         } catch (NoResultException e) {
             return null; 
         }
     }
-	
+
 	public void encerrarSistema() {
 		em.close();
 	}
