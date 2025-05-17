@@ -50,7 +50,13 @@ LEFT JOIN ss_playlist_midia pm ON pm.playlist_id = pl.id
 LEFT JOIN ss_midia m ON pm.midia_id = m.id
 GROUP BY u.nome, pl.nome, m.titulo, m.artista, m.tipo_midia, m.genero;
 
+delete from ss_playlist_midia where midia_id = 15;
 
+DELETE FROM ss_playlist_midia 
+WHERE playlist_id = 2 AND midia_id = 15;
+
+SELECT * FROM ss_midia
+WHERE id IN (15, 36);
 
   
 
