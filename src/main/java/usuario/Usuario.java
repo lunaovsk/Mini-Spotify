@@ -60,16 +60,33 @@ public class Usuario {
 
 
 	public Set<PlayList> getPlaylist() {
-		for (PlayList pl : this.playlist) {
-			Long duracaoPl = pl.getDuracao();
-			System.out.println("PlayList (" + pl.getNome() + "| Duração: " + pl.converter(duracaoPl) + ")\n");
-			for (Midias m : pl.getMidias()) {
-				System.out.println("  Titulo: " + m.getTitulo() +
-						" | Autor: " + m.getArtista() +
-						" | Genero: " + m.getGenero());
+		return this.playlist;
+	}
+	public String mostrarPlaylists() {
+		if (playlist == null || playlist.isEmpty()) {
+			return " Você não possuí PlayList";
+		}
+
+		StringBuilder sb = new StringBuilder();
+		for (PlayList pl : playlist) {
+			sb.append("\nID: ").append(pl.getId())
+					.append(" | PlayList (").append(pl.getNome())
+					.append("| Duração: ").append(pl.converter(pl.getDuracao()))
+					.append(")\n\n");
+
+			if (pl.getMidias() == null || pl.getMidias().isEmpty()) {
+				sb.append("  (Nenhuma mídia adicionada ainda)\n");
+			} else {
+				for (Midias m : pl.getMidias()) {
+					sb.append("  ID: ").append(m.getId())
+							.append(" | Titulo: ").append(m.getTitulo())
+							.append(" | Autor: ").append(m.getArtista())
+							.append(" | Genero: ").append(m.getGenero().getDescricao())
+							.append(".\n");
+				}
 			}
 		}
-		return this.playlist;
+		return sb.toString();
 	}
 
 
@@ -81,8 +98,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		System.out.println("Usuario (Nome: " + nome + ")");
-		getPlaylist();
-		return "";
+		return "Usuario (Nome: " + nome + ")\n" + mostrarPlaylists();
+
 	}
 }
