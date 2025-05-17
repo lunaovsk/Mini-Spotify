@@ -1,5 +1,6 @@
 package midia;
 
+import org.hibernate.Hibernate;
 import playlist.PlayList;
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -38,8 +39,31 @@ public class MidiasDao {
         em.getTransaction().begin();
         PlayList pl = em.find(PlayList.class, idPlayList);
         Midias m = em.find(Midias.class, idMidia);
-        pl.getMidias().add(m);
-        em.merge(pl);
+        if (pl != null && m != null) {
+            pl.getMidias().add(m);
+            pl.setDuracao(pl.getDuracao() + m.getDuracao());
+            em.merge(pl);
+            Hibernate.initialize(pl.getMidias());
+            em.flush();
+        }
         em.getTransaction().commit();
     }
+
+    public void removeMidia(Long idPlaylist, Long idMidia) {
+        em.getTransaction().begin();
+
+        PlayList pl = em.find(PlayList.class, idPlaylist);
+        Midias m = em.find(Midias.class, idMidia);
+        if (pl != null && m != null) {
+            pl.getMidias().remove(m);
+            pl.setDuracao(pl.getDuracao() - m.getDuracao());
+            em.merge(pl);
+            em.flush();
+        }
+        em.getTransaction().commit();
+    }
+
+
+
+
 }
