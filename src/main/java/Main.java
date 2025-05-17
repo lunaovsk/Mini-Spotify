@@ -30,6 +30,9 @@ public class Main {
 								sistema.adicionarMidias();
 								break;
 							case 3:
+								sistema.removerMidia();
+								break;
+							case 4:
 								break;
 							default:
 								System.out.println("Escolha um número das opções listas: ");
