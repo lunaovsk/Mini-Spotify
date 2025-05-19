@@ -7,7 +7,7 @@ public class JPAUtil {
 private EntityManagerFactory factory;
 	
 	public JPAUtil() {
-		this.factory = Persistence.createEntityManagerFactory("loja");
+		this.factory = Persistence.createEntityManagerFactory("spotify");
 	}
 	public EntityManager getEntityManager() {
 		return factory.createEntityManager();
