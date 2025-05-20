@@ -35,6 +35,12 @@ public class MidiasDao {
         return sql.getResultList();
     }
 
+    public List<Midias> findByGenero(Generos generos) {
+        var sql = em.createQuery("SELECT m FROM Midias m WHERE m.genero = :genero", Midias.class)
+                .setParameter("genero", generos);
+        return sql.getResultList();
+    }
+
     public void addMidia(Long idPlayList, Long idMidia) {
         em.getTransaction().begin();
         PlayList pl = em.find(PlayList.class, idPlayList);
