@@ -22,4 +22,13 @@ public enum Generos {
     public String getDescricao() {
         return descricao;
     }
+    public int getIndice () { return indice;}
+    public static Generos getDescricaoIndice(int indice) {
+        for (Generos g : Generos.values()) {
+            if (g.indice == indice) {
+                return g;
+            }
+        }
+        return null;
+    }
 }
