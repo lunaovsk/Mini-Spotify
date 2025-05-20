@@ -26,6 +26,7 @@ public class Sistema {
 		this.em = em;
 	}
 
+
 	public void catalogo() {
 		List<Midias> m = midiasDao.catalogo();
 		for (Midias midia : m) {
@@ -35,23 +36,30 @@ public class Sistema {
 	public void listarMusicas() {
 		System.out.print("1. Visualizar todo o catálogo. \n" +
 				"2. Visualizar por tipo.\n" +
-				"3. Filtrar.\n" +
-				"4. Sair.");
+				"3. Filtrar (Artista/titulo).\n" +
+				"4. Filtrar Genero.\n" +
+				"5. Sair.");
 		System.out.print("Qual a opção desejada? ");
 		int escolha = scan.nextInt();
 		scan.nextLine();
-		if (escolha == 1) {
-			catalogo();
-		} else if (escolha == 2) {
-			listarPorTipo(true);
-		} else if (escolha == 3) {
-			filtroMusica();
-		} else if (escolha == 4) {
-			System.out.println("Retornando ao menu...");
-		} else {
-			System.out.println("Escolha uma opção válida");
-			}
+		switch (escolha) {
+			case 1:
+				catalogo();
+				break;
+			case 2:
+				listarPorTipo(true);
+				break;
+			case 3:
+				filtroMusica();
+				break;
+			case 4:
+				filtroGenero();
+				break;
+			default:
+				System.out.println("Escolha uma opção válida. ");
+				return;
 		}
+	}
 	public void addUser() {
 		System.out.print("\nDigite o seu nome completo: ");
 		String nome = scan.nextLine().trim();
@@ -278,6 +286,19 @@ public class Sistema {
 			}
 			return tipo;
 	}
+	public void filtroGenero () {
+		System.out.println("\nGeneros disponíveis: \n");
+		for (Generos g : Generos.values()) {
+			System.out.println(g.getIndice() + ". " + g.getDescricao() + ".");
+		}
+		System.out.print("Digite o número do gênero: ");
+		int escolha = scan.nextInt();
+		Generos generoSelecionado = Generos.getDescricaoIndice(escolha);
+		List<Midias> m = midiasDao.findByGenero(generoSelecionado);
+		for (Midias midias : m) {
+			System.out.println(midias);
+		}
+	}
 	public void encerrarSistema() {
 		usuarioDao.encerrarSistema();
 		System.out.println("Sistema encerrado.");
@@ -338,7 +359,6 @@ public class Sistema {
 		return selecao;
 
 	}
-
 	public void viewAll() {
 		List<Usuario> list = listDao.findByPlayList();
 		if (list.isEmpty()) {
