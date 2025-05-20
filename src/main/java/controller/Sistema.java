@@ -55,9 +55,11 @@ public class Sistema {
 			case 4:
 				filtroGenero();
 				break;
+			case 5:
+				break;
 			default:
 				System.out.println("Escolha uma opção válida. ");
-				return;
+
 		}
 	}
 	public void addUser() {
