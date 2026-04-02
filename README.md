@@ -76,7 +76,7 @@ Cada tipo de mídia herda os atributos da classe `Midia` e pode ter comportament
 
 ---
 
-## 🏁 Conclusão
+## Conclusão
 
 Este projeto implementou com sucesso um **sistema completo de streaming musical**, demonstrando:
 
