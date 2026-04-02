@@ -1,4 +1,4 @@
-# Screen Sound 🎵
+# Screen Sound
 
 **Screen Sound** é um sistema de gerenciamento de playlists e mídias musicais desenvolvido em **Java** com **JPA/Hibernate**, como parte do projeto da disciplina de POO Avançado. O sistema simula funcionalidades básicas de serviços de streaming de música, permitindo:
 
@@ -80,17 +80,17 @@ Cada tipo de mídia herda os atributos da classe `Midia` e pode ter comportament
 
 Este projeto implementou com sucesso um **sistema completo de streaming musical**, demonstrando:
 
-✅ **Domínio de JPA/Hibernate**  
+**Domínio de JPA/Hibernate**  
 - Mapeamento ORM avançado com herança (`SINGLE_TABLE`)  
 - Relacionamentos `@OneToMany` e `@ManyToMany` otimizados  
 - Consultas JPQL eficientes  
 
-✅ **Padrões OO sólidos**  
+**Padrões OO sólidos**  
 - Hierarquia de classes bem definida (`Midia` como abstração)  
 - Encapsulamento rigoroso  
 - Polimorfismo em operações de catálogo  
 
-✅ **Boas práticas**  
+**Boas práticas**  
 - Tratamento de exceções  
 - Separação de concerns (DAO vs Controller)  
 - Documentação clara  
@@ -101,14 +101,14 @@ Este projeto implementou com sucesso um **sistema completo de streaming musical*
 - [ ] Desenvolver frontend em React/Angular  S
 
 ---
-🎉 Projeto acadêmico concluído com excelência
+Projeto acadêmico concluído com excelência
 
-📆 Data de entrega: 19/05/2025.
-📜 Licença: MIT (livre para uso educacional).
+Data de entrega: 19/05/2025.
+Licença: MIT (livre para uso educacional).
 
 ---
 
-## 📊 Diagrama de Classes (Core)
+## Diagrama de Classes (Core)
 
 ```mermaid
 classDiagram
